@@ -43,12 +43,18 @@ module.exports = function (config) {
       classNameFormatter: undefined, // function (browser, result) to customize the classname attribute in xml testcase element
       properties: {} // key value pair of properties to add to the section of the report
   },
-    port: 9876,
-    colors: true,
-    logLevel: config.LOG_INFO,
-    autoWatch: true,
-    browsers: ['Chrome'],
-    singleRun: false,
-    restartOnFileChange: true
+  port: 9876,
+  colors: true,
+  concurrency: Infinity,
+  logLevel: config.LOG_INFO,
+  autoWatch: true,
+  browsers: ['ChromeHeadlessNoSandbox'],
+  singleRun: true,
+  customLaunchers: {
+    ChromeHeadlessNoSandbox: {
+      base: 'ChromeHeadless',
+      flags: ['--no-sandbox','--headless','--disable-gpu','--disable-translate','--disable-extensions']
+    }
+  }
   });
 };
